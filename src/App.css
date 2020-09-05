@@ -61,6 +61,17 @@ section {
   font-weight: 600;
 }
 
+.divGifLoadingBtn {
+  padding: 1.7px 25px;
+  margin-right: 5px;
+  background-color: #444;
+}
+
+.gifLoadingBtn {
+  width: 30px;
+  height: 30px;
+}
+
 .secondary {
   background-color: white;
   color: #444;
@@ -144,11 +155,45 @@ input:focus {
   justify-content: center;
 }
 
-.btnFormPost {
+/*.btnFormPost {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   margin-top: 1rem;
+  background-color: red;
+}*/
+
+.btnFormPost {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1rem;
+}
+
+.btnFormPost2 {
+  width: 80%;
+  font-size: 17px;
+  color: #f3f3f3;
+  margin-inline-start: 10px;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.btnFormPost3 {
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.txtFormPost {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
 }
 
 .container {
@@ -170,6 +215,67 @@ input:focus {
   min-height: 60px;
   outline: none;
   font-family: "Roboto", sans-serif;
+}
+
+.postVazio {
+  height: 185px;
+  background-color: #3d3d3d20;     
+  box-shadow: 0 0px 0px;  
+}
+
+.postLoading {
+  background-color: #3d3d3d;
+}
+
+.divTxtPostVazio {
+  width: 50%;
+  height: 15px;
+  border-radius: 12px;
+  margin-top: 2px;
+  background-color: #565656;
+}
+
+.divTxtPostVazio2 {
+  width: 30%;
+  height: 13px;
+  margin-top: 7px;
+}
+
+.divLogoCaixaVazia {  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+
+.divLogoLoading {
+  padding: 35px;
+}
+
+.logoCaixaVazia {  
+  width: 70px;
+  height: 70px;
+}
+
+.txtLogoCaixaVazia {
+  margin-top: 5px;
+  color: #888888;
+}
+
+.divHoraPostVazio {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 5px;
+}
+
+.txtHoraPostVazio {
+  width: 30%;
+  height: 12px;
+  border-radius: 12px;
+  margin-top: 2px;
+  background-color: #565656;
 }
 
 .txtPost {
