@@ -1,0 +1,198 @@
+/** @format */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background-color: #444;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #444;
+}
+::-webkit-scrollbar {
+  width: 6px;
+  background: #444;
+}
+::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 12px;
+}
+
+header {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 2rem;
+  background-color: #444;
+}
+
+section {
+  padding: 3rem 0 4rem 0;
+  background-color: #444;
+}
+
+.button {
+  padding: 10px 25px;
+  text-decoration: none;
+  border-radius: 15px;
+  margin-right: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  outline: none;
+}
+
+.button:hover {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.button:focus {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.primary {
+  font-family: "Roboto", sans-serif;
+  background-color: #363636;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.secondary {
+  background-color: white;
+  color: #444;
+}
+
+.separator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.divSeparator {
+  align-self: center;
+  width: 80%;
+  height: 1px;
+  background-color: #767676;
+}
+
+.sign-in {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sign-in button {
+  border: none;
+}
+
+.sign-in button:hover {
+  cursor: pointer;
+}
+
+.inputPost {
+  padding: 0.5rem;
+  border-radius: 2px;
+  border: 0.1px solid #565656;
+  background-color: #696969;
+  font-size: 17px;
+  color: #c6c6c6;
+  font-family: "Roboto", sans-serif;
+  outline: none;
+  resize: none;
+  overflow-y: hidden;
+  width: 30rem;
+  height: 10rem;
+  outline: none;
+}
+
+/*altera estilos do placeholder*/
+::-webkit-input-placeholder {
+  font-size: 17px;
+  color: #c6c6c6;
+  font-family: "Roboto", sans-serif;
+}
+
+:-moz-placeholder {
+  font-size: 17px;
+  color: #c6c6c6;
+  font-family: "Roboto", sans-serif;
+}
+
+::-moz-placeholder {
+  font-size: 17px;
+  color: #c6c6c6;
+  font-family: "Roboto", sans-serif;
+}
+
+:-ms-input-placeholder {
+  font-size: 18px;
+  color: #c6c6c6;
+  font-family: "Roboto", sans-serif;
+}
+
+input:focus {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.formPost {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.btnFormPost {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.post {
+  list-style: none;
+  margin: 10px;
+  padding: 0.5rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: #565656;
+  color: #b4b4b4;
+  width: 30rem;
+  min-height: 60px;
+  outline: none;
+  font-family: "Roboto", sans-serif;
+}
+
+.txtPost {
+  padding: 10px;
+}
+
+.divHoraPost {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 5px;
+}
+
+.txtHoraPost {
+  font-size: 13px;
+  color: #7c7c7c;
+}
+
+footer {
+  background-color: #3d3d3d;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: flex-start;
+  padding: 0.5rem;
+}
