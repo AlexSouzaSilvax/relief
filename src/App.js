@@ -2,12 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 
-import Header from "./Header.js";
-import Separator from "./Separator.js";
-import ListaPosts from "./ListaPosts";
+import Header from "../src/component/Header.js";
+import Separator from "../src/component/Separator.js";
+import ListaPosts from "../src/component/ListaPosts";
 
 import "./App.css";
-import { sleep } from "./service/api.js";
+import { sleep, getDtHrAtual, pegaIndexLista } from "./service/api.js";
+import Modal from "./component/Modal.js";
 
 function App() {
   const [txtPost, setTxtPost] = useState();
@@ -15,14 +16,8 @@ function App() {
   /*
   {
       id: 0,
-      post:
-        "Aqui seria um post 1 se fosse um texto grande ficaria assim ó ta vendo? quase foi, mas, agora vai, perfeito Aqui seria um post 1 se fosse um texto grande ficaria assim ó ta vendo? quase foi, mas, agora vai, perfeito Aqui seria um post 1 se fosse um texto grande ficaria assim ó ta vendo? quase foi, mas, agora vai, perfeito Aqui seria um post 1 se fosse um texto grande ficaria assim ó ta vendo?",
-      hrDt: "22:05 • 04/09/2020",
-    },
-    {
-      id: 0,
-      post: "Aqui seria um post 1 se fosse",
-      hrDt: "22:05 • 04/09/2020",
+      post: "0000",
+      hrDt: "00:00 • 00/00/0000",
     },
      */
   const [loading, setLoading] = useState(true);
@@ -32,39 +27,79 @@ function App() {
   const [txtInfo, setTxtInfo] = useState("");
   const [corTxtInfo, setCorTxtInfo] = useState("");
 
+  const [postSelecionado, setPostSelecinado] = useState({ id: null });
+
+  const [modalVisible, setModalVisible] = useState(false);
+
   useEffect(async () => {
     setLoading(true);
-    await sleep(5000);
+    await sleep(500); //5000
     getPosts();
-    setLoading(false);
   }, []);
 
   async function getPosts() {
     await fetch("https://alex-api-cobranca.herokuapp.com/usuarioss")
       .then((response) => {
+        /*
         setTxtInfo(response.status);
         setPosts([
           {
-            id: 0,
+            id: posts.length,
             post:
               "Aqui seria um post 1 se fosse um texto grande ficaria assim ó ta vendo? quase foi, mas, agora vai, perfeito Aqui seria um post 1 se fosse um texto grande ficaria assim ó ta vendo? quase foi, mas, agora vai, perfeito Aqui seria um post 1 se fosse um texto grande ficaria assim ó ta vendo? quase foi, mas, agora vai, perfeito Aqui seria um post 1 se fosse um texto grande ficaria assim ó ta vendo?",
             hrDt: "22:05 • 04/09/2020",
           },
-        ]);
+        ]);*/
       })
       .catch((error) => {
         console.error(error);
       });
+    setLoading(false);
   }
 
   async function salvarPost(ev) {
     ev.preventDefault();
     setLoadingBtn(true);
     if (txtPost) {
-      posts.unshift({ id: 0, post: txtPost, hrDt: "22:05 • 04/09/2020" });
+      posts.splice(
+        pegaIndexLista(posts, postSelecionado.id), // a partir desse index
+        postSelecionado.id != null ? 1 : 0, /// 1 = remove 1 item ( no caso para um item existente), 0 = nao remove nenhum item
+        {
+          id: posts.length,
+          post: txtPost,
+          hrDt: getDtHrAtual(),
+        } // obj a ser adicionado
+      );
       setTxtPost("");
+      msgInfo(
+        postSelecionado.id != null
+          ? "Alterado com sucesso"
+          : "Salvo com sucesso"
+      );
     }
     setLoadingBtn(false);
+    setPostSelecinado({ id: null });
+    setTxtBtn("Go");
+  }
+
+  function onClickEditar(p) {
+    setTxtBtn("Salvar");
+    setPostSelecinado(p);
+    setTxtPost(p.post);
+  }
+
+  function onClickApagar() {
+    setModalVisible(!modalVisible);
+    posts.splice(pegaIndexLista(posts, postSelecionado.id), 1);
+    setLoading(false);
+    msgInfo("Apagado com sucesso");
+    setPostSelecinado({ id: null });
+  }
+
+  async function msgInfo(txt) {
+    setTxtInfo(txt);
+    await sleep(1500);
+    setTxtInfo("");
   }
 
   return (
@@ -79,7 +114,20 @@ function App() {
         corTxtInfo={corTxtInfo}
       />
       <Separator />
-      <ListaPosts posts={posts} loading={loading} />
+      <Modal
+        modalVisible={modalVisible}
+        setModalVisible={() => setModalVisible(!modalVisible)}
+        onClickApagar={onClickApagar}
+      />
+      <ListaPosts
+        posts={posts}
+        loading={loading}
+        onClickEditar={(p) => onClickEditar(p)}
+        onClickApagar={(p) => {
+          setPostSelecinado(p);
+          setModalVisible(!modalVisible);
+        }}
+      />
     </>
   );
 }

@@ -5,9 +5,21 @@ import CardPosts from "./CardPosts";
 import CardPostsVazio from "./CardPostsVazio";
 import CardLoading from "./CardLoading";
 
-export default function ListaPosts({ posts, loading }) {
+export default function ListaPosts({
+  posts,
+  loading,
+  onClickEditar,
+  onClickApagar,
+}) {
   const lista = posts.map((p) => {
-    return <CardPosts key={p.id} p={p} />;
+    return (
+      <CardPosts
+        key={p.id}
+        p={p}
+        onClickEditar={() => onClickEditar(p)}
+        onClickApagar={() => onClickApagar(p)}
+      />
+    );
   });
 
   return (
@@ -19,11 +31,9 @@ export default function ListaPosts({ posts, loading }) {
           <>
             {posts.length > 0 ? (
               <ul className='posts'>{lista}</ul>
-            ) : posts.length < 0 ? (
+            ) : loading == false && posts.length === 0 ? (
               <CardPostsVazio />
-            ) : (
-              <CardLoading />
-            )}
+            ) : null}
           </>
         )}
       </div>

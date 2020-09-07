@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import logoCaixaVazia from "./img/logoCaixaVazia.png";
+import logoCaixaVazia from "../img/logoCaixaVazia.png";
 
 export default function CardPostsVazio({ }) {
   return (

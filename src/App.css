@@ -73,8 +73,13 @@ section {
 }
 
 .secondary {
-  background-color: white;
-  color: #444;
+  padding: 8px 23px;
+  background-color: #dadada;
+  color: #616161;
+  font-family: "Roboto", sans-serif;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  font-size: 15px;
+  font-weight: 600;
 }
 
 .separator {
@@ -155,14 +160,6 @@ input:focus {
   justify-content: center;
 }
 
-/*.btnFormPost {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  margin-top: 1rem;
-  background-color: red;
-}*/
-
 .btnFormPost {
   display: flex;
   flex-direction: row;
@@ -173,7 +170,7 @@ input:focus {
   width: 80%;
   font-size: 17px;
   color: #f3f3f3;
-  margin-inline-start: 10px;
+  margin-inline-start: 20px;
   font-family: "Roboto", sans-serif;
   display: flex;
   flex-direction: row;
@@ -217,10 +214,16 @@ input:focus {
   font-family: "Roboto", sans-serif;
 }
 
+.postFocus:focus,
+.postFocus:hover,
+.postFocus:active {
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+}
+
 .postVazio {
   height: 185px;
-  background-color: #3d3d3d20;     
-  box-shadow: 0 0px 0px;  
+  background-color: #3d3d3d20;
+  box-shadow: 0 0px 0px;
 }
 
 .postLoading {
@@ -241,7 +244,7 @@ input:focus {
   margin-top: 7px;
 }
 
-.divLogoCaixaVazia {  
+.divLogoCaixaVazia {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -253,7 +256,7 @@ input:focus {
   padding: 35px;
 }
 
-.logoCaixaVazia {  
+.logoCaixaVazia {
   width: 70px;
   height: 70px;
 }
@@ -286,12 +289,17 @@ input:focus {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  margin-top: 5px;
+  margin-top: 13px;
 }
 
 .txtHoraPost {
   font-size: 13px;
   color: #7c7c7c;
+}
+
+.txtHoraPost:hover,
+.txtHoraPost:focus {
+  cursor: default;
 }
 
 footer {
@@ -301,4 +309,90 @@ footer {
   justify-content: flex-start;
   align-content: flex-start;
   padding: 0.5rem;
+}
+
+.logoEditar {
+  width: 18px;
+  height: 18px;
+}
+
+.logoApagar {
+  margin-top: 5px;
+}
+
+.logoEditar:focus,
+.logoEditar:hover {
+  cursor: pointer;
+}
+
+.divCorpoPost {
+  display: flex;
+  flex-direction: row;
+}
+
+.divLogoPost {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2px;
+}
+
+.divTxtPost {
+  width: 100%;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99999;
+  opacity: 1;
+  -webkit-transition: opacity 400ms ease-in;
+  -moz-transition: opacity 400ms ease-in;
+  transition: opacity 400ms ease-in;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal > div {
+  width: 400px;
+  border-radius: 10px;
+  background-color: #696969;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tituloModal {
+  font-size: 18px;
+  font-weight: 700;
+  color: #c6c6c6;
+  font-family: "Roboto", sans-serif;
+}
+
+.txtInfoModal {
+  color: #b2b2b2;
+  font-size: 16px;
+  font-weight: 100;
+  padding: 8px;
+}
+
+.divBtnModal {
+  margin-top: 10px;
+  margin: 10px;
+}
+
+.btnModal:focus,
+.btnModal:hover {
+  cursor: pointer;
+}
+
+.txtBtnModal {
+  font-weight: 700;
 }

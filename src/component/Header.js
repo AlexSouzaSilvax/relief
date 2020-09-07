@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import gifLoadingBtn from "./img/loadingBtn.gif";
+import gifLoadingBtn from "../img/loadingBtn.gif";
 
 export default function Headers({
   loadingBtn,
