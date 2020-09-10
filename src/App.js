@@ -31,14 +31,18 @@ function App() {
 
   const [modalVisible, setModalVisible] = useState(false);
 
-  useEffect(async () => {
+  useEffect(() => {
+    async function _sleep() {
+      await sleep(500); //5000
+    }
     setLoading(true);
-    await sleep(500); //5000
-    getPosts();
+    _sleep();
+    //getPosts();
+    setLoading(false);
   }, []);
 
-  async function getPosts() {
-    await fetch("https://alex-api-cobranca.herokuapp.com/usuarioss")
+  /*async function getPosts() {
+    /*await fetch("https://alex-api-cobranca.herokuapp.com/usuarioss")
       .then((response) => {
         /*
         setTxtInfo(response.status);
@@ -49,13 +53,13 @@ function App() {
               "Aqui seria um post 1 se fosse um texto grande ficaria assim ó ta vendo? quase foi, mas, agora vai, perfeito Aqui seria um post 1 se fosse um texto grande ficaria assim ó ta vendo? quase foi, mas, agora vai, perfeito Aqui seria um post 1 se fosse um texto grande ficaria assim ó ta vendo? quase foi, mas, agora vai, perfeito Aqui seria um post 1 se fosse um texto grande ficaria assim ó ta vendo?",
             hrDt: "22:05 • 04/09/2020",
           },
-        ]);*/
+        ]);/
       })
       .catch((error) => {
         console.error(error);
-      });
+      });/
     setLoading(false);
-  }
+  }*/
 
   async function salvarPost(ev) {
     ev.preventDefault();
@@ -94,6 +98,8 @@ function App() {
     setLoading(false);
     msgInfo("Apagado com sucesso");
     setPostSelecinado({ id: null });
+    setTxtPost("");
+    setTxtBtn("Go");
   }
 
   async function msgInfo(txt) {

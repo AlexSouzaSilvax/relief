@@ -31,7 +31,7 @@ export default function ListaPosts({
           <>
             {posts.length > 0 ? (
               <ul className='posts'>{lista}</ul>
-            ) : loading == false && posts.length === 0 ? (
+            ) : loading === false && posts.length === 0 ? (
               <CardPostsVazio />
             ) : null}
           </>
