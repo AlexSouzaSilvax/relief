@@ -1,0 +1,121 @@
+.header {
+  min-height: 8vh;
+  background-color: #3d3d3d30;
+}
+
+.section {
+  min-height: 84vh;
+  background-color: #444;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.conteudo {
+  width: 90%;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.conteudoAmostra {
+  width: 70%;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.conteudoAmostraDiv {
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.conteudoAmostraDivText {
+  width: 80%;
+  margin: 15px;
+  font-size: 18px;
+  font-family: cursive;
+  color: #a5a5a5;
+}
+
+.conteudoAmostraDivImg {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  margin-right: 20px;
+  background-color: #787878;
+}
+
+.conteudoAcesso {
+  width: 30%;
+  min-height: 80vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.conteudoAcessoDiv {
+  width: 400px;
+  min-height: 60vh;
+  background-color: #ffffff99;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form input {
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  border-radius: 6px;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.login-form button {
+  text-transform: uppercase;
+  outline: 0;
+  background: #565656;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: bold;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+  border-radius: 2px;
+}
+.login-form button:hover,
+.login-form button:active,
+.login-form button:focus {
+  background: #666666;
+}
+
+.footer {
+  min-height: 8vh;
+  background-color: #56565620;
+}
