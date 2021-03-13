@@ -1,13 +1,13 @@
 /** @format */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 import Header from "../../component/Header.js";
 import Separator from "../../component/Separator.js";
 import ListaPosts from "../../component/ListaPosts";
 
 import "./styles.css";
-import api, { sleep, getDtHrAtual, pegaIndexLista } from "../../service/api.js";
+import api, { sleep, getDtHrAtual } from "../../service/api.js";
 import Modal from "../../component/Modal.js";
 import ModalLogin from "../../component/ModalLogin.js";
 
@@ -26,6 +26,9 @@ function App({ history }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalLoginVisible, setModalLoginVisible] = useState(false);
 
+  const [tecla1, setTecla1] = useState();
+  const [tecla2, setTecla2] = useState();
+
   useEffect(() => {
     if (!localStorage.getItem("idLogin")) {
       setModalLoginVisible(!modalLoginVisible);
@@ -33,6 +36,38 @@ function App({ history }) {
       setLoading(true);
       getPosts();
       setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("keydown", escFunction, false);
+
+    return () => {
+      document.removeEventListener("keydown", escFunction, false);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (tecla1 === 17 && tecla2 === 13) {
+      salvarPost();
+      setTecla1();
+      setTecla2();
+    }
+  }, [tecla1, tecla2]);
+
+  const escFunction = useCallback((event) => {
+    console.log("event.keyCode: " + event.keyCode);
+    if (event.keyCode === 27) {
+      //tecla esc
+      setPostSelecinado({ _id: null });
+      setTxtBtn("Go");
+      setTxtPost("");
+    }
+    if (event.keyCode === 17) {
+      setTecla1(event.keyCode);
+    }
+    if (event.keyCode === 13) {
+      setTecla2(event.keyCode);
     }
   }, []);
 
@@ -46,7 +81,7 @@ function App({ history }) {
       .post("/post", {
         usuario: localStorage.getItem("idLogin"),
       })
-      .then((response) => {       
+      .then((response) => {
         setPosts(response.data);
       })
       .catch((error) => {
@@ -56,10 +91,12 @@ function App({ history }) {
   }
 
   async function salvarPost(ev) {
-    ev.preventDefault();
-    setLoadingBtn(true);
+    if (ev) {
+      ev.preventDefault();
+    }
     if (txtPost) {
-      if (postSelecionado._id) {
+      setLoadingBtn(true);
+      if (!postSelecionado._id === null) {
         await api
           .post("/post/atualizar", {
             _id: postSelecionado._id,
@@ -89,10 +126,14 @@ function App({ history }) {
             msgInfo("Não foi possivel salvar este post");
           });
       }
+      setPostSelecinado({ _id: null });
+      setLoadingBtn(false);
+      setTxtPost("");
+      setTxtBtn("Go");
+      getPosts();
+    } else {
+      msgInfo("Post vazio");
     }
-    setLoadingBtn(false);
-    setTxtBtn("Go");
-    getPosts();
   }
 
   function onClickEditar(p) {
@@ -101,20 +142,21 @@ function App({ history }) {
     setTxtPost(p.post);
   }
 
- async function onClickApagar() {
+  async function onClickApagar() {
     setModalVisible(!modalVisible);
     setLoading(true);
 
-    await api.post("/post/apagar", {
-      _id: postSelecionado._id,
-    })
-    .then((response) => {
-      msgInfo("Apagado com sucesso");
-    })
-    .catch((error) => {
-      console.error(error);
-      msgInfo("Não foi possivel apagar este post");
-    });
+    await api
+      .post("/post/apagar", {
+        _id: postSelecionado._id,
+      })
+      .then((response) => {
+        msgInfo("Apagado com sucesso");
+      })
+      .catch((error) => {
+        console.error(error);
+        msgInfo("Não foi possivel apagar este post");
+      });
     setLoading(false);
     setPostSelecinado({ id: null });
     setTxtPost("");

@@ -6,8 +6,8 @@ import "./styles.css";
 
 export default function Login({ history }) {
   
-  const [usuario, setUsuario] = useState("alex");
-  const [senha, setSenha] = useState("123");
+  const [usuario, setUsuario] = useState("");
+  const [senha, setSenha] = useState("");
   
   const [visibleMsg, setVisibleMsg] = useState(false);
   const [textMsg, setTextMsg] = useState('');
@@ -16,7 +16,7 @@ export default function Login({ history }) {
     event.preventDefault();
     
     setVisibleMsg(false);
-    setTextMsg('');    
+    setTextMsg('Carregando');    
 
     if (!usuario || !senha) {
       setVisibleMsg(true);
@@ -69,31 +69,31 @@ export default function Login({ history }) {
         </div>
       </div>
       <div className="section">
-        <div class="conteudo">
-          <div class="conteudoAmostra">
-            <div class="conteudoAmostraDiv">
-              <p class="conteudoAmostraDivText">
+        <div className="conteudo">
+          <div className="conteudoAmostra">
+            <div className="conteudoAmostraDiv">
+              <p className="conteudoAmostraDivText">
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry's standard dummy
                 text ever since the 1500s.
               </p>
-              <div class="conteudoAmostraDivImg"></div>
+              <div className="conteudoAmostraDivImg"></div>
             </div>
-            <div class="conteudoAmostraDiv">
-              <div class="conteudoAmostraDivImg"></div>
-              <p class="conteudoAmostraDivText">
+            <div className="conteudoAmostraDiv">
+              <div className="conteudoAmostraDivImg"></div>
+              <p className="conteudoAmostraDivText">
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry's standard dummy
                 text ever since the 1500s.
               </p>
             </div>
-            <div class="conteudoAmostraDiv">
-              <p class="conteudoAmostraDivText">
+            <div className="conteudoAmostraDiv">
+              <p className="conteudoAmostraDivText">
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry's standard dummy
                 text ever since the 1500s.
               </p>
-              <div class="conteudoAmostraDivImg"></div>
+              <div className="conteudoAmostraDivImg"></div>
             </div>
           </div>
           
