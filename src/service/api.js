@@ -1,12 +1,10 @@
-/**
- * /*import axios from "axios";
- *
- * export const api = axios.create({
- *   baseURL: "",
- * });
- *
- * @format
- */
+import axios from "axios";
+
+ const api = axios.create({
+   baseURL: "https://alex-api-cobranca.herokuapp.com"
+ });
+ 
+ export default api;
 
 export function sleep(time) {
   return new Promise((resolve) => setTimeout(resolve, time));

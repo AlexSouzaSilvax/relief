@@ -14,7 +14,7 @@ export default function ListaPosts({
   const lista = posts.map((p) => {
     return (
       <CardPosts
-        key={p.id}
+        key={p._id}
         p={p}
         onClickEditar={() => onClickEditar(p)}
         onClickApagar={() => onClickApagar(p)}

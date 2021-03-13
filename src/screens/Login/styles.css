@@ -1,6 +1,36 @@
 .header {
   min-height: 8vh;
   background-color: #3d3d3d30;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.headerDiv {
+  min-height: 7vh;
+  width: 70%;  
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.headerDivNome {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex: 1;
+}
+
+.headerDivNomeText {
+  color: #F3F3F3;
+}
+.headerDivAcesso {
+  min-height: 7vh;
+  width: 30%;
+  display: flex;
+  justify-content: flex-end;  
+  align-items: center;
 }
 
 .section {

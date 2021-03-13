@@ -13,9 +13,9 @@ export default function Headers({
   corTxtInfo,
 }) {
   return (
-    <header>
-      <div className='sign-in'>
-        <div className='formPost'>
+    <header>    
+      <div className='sign-in'>        
+        <div className='formPost'>        
           <textarea
             wrap='hard'
             cols='30'

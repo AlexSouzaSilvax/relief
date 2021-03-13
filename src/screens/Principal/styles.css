@@ -450,3 +450,24 @@ footer {
 .txtBtnModal {
   font-weight: 700;
 }
+
+.options {
+  min-height: 4vh;  
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;  
+}
+
+.sair {
+  margin-right: 10px;
+  width: 50px;
+  height: 30px;
+}
+
+.sairText {
+  color: #888888;
+}
+
+.sairText:hover {
+  cursor: pointer;  
+}

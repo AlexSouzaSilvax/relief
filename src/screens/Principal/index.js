@@ -7,19 +7,13 @@ import Separator from "../../component/Separator.js";
 import ListaPosts from "../../component/ListaPosts";
 
 import "./styles.css";
-import { sleep, getDtHrAtual, pegaIndexLista } from "../../service/api.js";
+import api, { sleep, getDtHrAtual, pegaIndexLista } from "../../service/api.js";
 import Modal from "../../component/Modal.js";
+import ModalLogin from "../../component/ModalLogin.js";
 
-function App() {
+function App({ history }) {
   const [txtPost, setTxtPost] = useState();
   const [posts, setPosts] = useState([]);
-  /*
-  {
-      id: 0,
-      post: "0000",
-      hrDt: "00:00 • 00/00/0000",
-    },
-     */
   const [loading, setLoading] = useState(true);
   const [loadingBtn, setLoadingBtn] = useState(false);
   const [txtBtn, setTxtBtn] = useState("Go");
@@ -27,33 +21,33 @@ function App() {
   const [txtInfo, setTxtInfo] = useState("");
   const [corTxtInfo, setCorTxtInfo] = useState("");
 
-  const [postSelecionado, setPostSelecinado] = useState({ id: null });
+  const [postSelecionado, setPostSelecinado] = useState({ _id: null });
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalLoginVisible, setModalLoginVisible] = useState(false);
 
   useEffect(() => {
-    async function _sleep() {
-      await sleep(500); //5000
+    if (!localStorage.getItem("idLogin")) {
+      setModalLoginVisible(!modalLoginVisible);
+    } else {
+      setLoading(true);
+      getPosts();
+      setLoading(false);
     }
-    setLoading(true);
-    _sleep();
-    getPosts();
-    setLoading(false);
   }, []);
 
+  function onClickModalLogin() {
+    history.push("/");
+  }
+
   async function getPosts() {
-    await fetch("https://alex-api-cobranca.herokuapp.com/usuarios")
-      .then((response) => {
-        
-        setTxtInfo(response.status);
-        setPosts([
-          {
-            id: posts.length,
-            post:
-              "Aqui seria um post 1 se fosse um texto grande ficaria assim ó ta vendo? quase foi, mas, agora vai, perfeito Aqui seria um post 1 se fosse um texto grande ficaria assim ó ta vendo? quase foi, mas, agora vai, perfeito Aqui seria um post 1 se fosse um texto grande ficaria assim ó ta vendo? quase foi, mas, agora vai, perfeito Aqui seria um post 1 se fosse um texto grande ficaria assim ó ta vendo?",
-            hrDt: "22:05 • 04/09/2020",
-          },
-        ]);
+    setLoading(true);
+    await api
+      .post("/post", {
+        usuario: localStorage.getItem("idLogin"),
+      })
+      .then((response) => {       
+        setPosts(response.data);
       })
       .catch((error) => {
         console.error(error);
@@ -65,41 +59,67 @@ function App() {
     ev.preventDefault();
     setLoadingBtn(true);
     if (txtPost) {
-      posts.splice(
-        pegaIndexLista(posts, postSelecionado.id), // a partir desse index
-        postSelecionado.id != null ? 1 : 0, /// 1 = remove 1 item ( no caso para um item existente), 0 = nao remove nenhum item
-        {
-          id: posts.length,
-          post: txtPost,
-          hrDt: getDtHrAtual(),
-        } // obj a ser adicionado
-      );
-      setTxtPost("");
-      msgInfo(
-        postSelecionado.id != null
-          ? "Alterado com sucesso"
-          : "Salvo com sucesso"
-      );
+      if (postSelecionado._id) {
+        await api
+          .post("/post/atualizar", {
+            _id: postSelecionado._id,
+            post: txtPost,
+            hrDt: getDtHrAtual(),
+            usuario: localStorage.getItem("idLogin"),
+          })
+          .then((response) => {
+            msgInfo("Alterado com sucesso!");
+          })
+          .catch((error) => {
+            console.error(error);
+            msgInfo("Não foi possivel alterar este post");
+          });
+      } else {
+        await api
+          .post("/post/criar", {
+            post: txtPost,
+            hrDt: getDtHrAtual(),
+            usuario: localStorage.getItem("idLogin"),
+          })
+          .then((response) => {
+            msgInfo("Salvo com sucesso!");
+          })
+          .catch((error) => {
+            console.error(error);
+            msgInfo("Não foi possivel salvar este post");
+          });
+      }
     }
     setLoadingBtn(false);
-    setPostSelecinado({ id: null });
     setTxtBtn("Go");
+    getPosts();
   }
 
   function onClickEditar(p) {
-    setTxtBtn("Salvar");
+    setTxtBtn("Editar");
     setPostSelecinado(p);
     setTxtPost(p.post);
   }
 
-  function onClickApagar() {
+ async function onClickApagar() {
     setModalVisible(!modalVisible);
-    posts.splice(pegaIndexLista(posts, postSelecionado.id), 1);
+    setLoading(true);
+
+    await api.post("/post/apagar", {
+      _id: postSelecionado._id,
+    })
+    .then((response) => {
+      msgInfo("Apagado com sucesso");
+    })
+    .catch((error) => {
+      console.error(error);
+      msgInfo("Não foi possivel apagar este post");
+    });
     setLoading(false);
-    msgInfo("Apagado com sucesso");
     setPostSelecinado({ id: null });
     setTxtPost("");
     setTxtBtn("Go");
+    getPosts();
   }
 
   async function msgInfo(txt) {
@@ -108,8 +128,19 @@ function App() {
     setTxtInfo("");
   }
 
+  function sair(ev) {
+    ev.preventDefault();
+    localStorage.removeItem("idLogin");
+    history.push("/");
+  }
+
   return (
     <>
+      <div className="options">
+        <div className="sair" onClick={sair}>
+          <p className="sairText">exit</p>
+        </div>
+      </div>
       <Header
         loadingBtn={loadingBtn}
         txtPost={txtPost}
@@ -133,6 +164,11 @@ function App() {
           setPostSelecinado(p);
           setModalVisible(!modalVisible);
         }}
+      />
+      <ModalLogin
+        modalVisible={modalLoginVisible}
+        setModalVisible={() => setModalLoginVisible(!modalLoginVisible)}
+        onClick={onClickModalLogin}
       />
     </>
   );
