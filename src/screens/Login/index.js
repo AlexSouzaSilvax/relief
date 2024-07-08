@@ -29,6 +29,7 @@ export default function Login({ history }) {
       setSenha("");
     } else {
       setLoad(true);
+     /*
       await api
         .post("/usuarios/buscar", {
           login: usuario,
@@ -55,7 +56,11 @@ export default function Login({ history }) {
           setVisibleMsg(true);
           setTextMsg("Serviço indisponível");
         });
-    }
+    
+        */
+      }
+    localStorage.setItem("idLogin", "1");
+    history.push("/principal");
     limpaInput();
     fechaMsg();
   }

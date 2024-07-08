@@ -11,6 +11,8 @@ import api, { sleep, getDtHrAtual } from "../../service/api.js";
 import Modal from "../../component/Modal.js";
 import ModalLogin from "../../component/ModalLogin.js";
 
+import mockPosts from "../../mock/mockPosts.json";
+
 function App({ history }) {
   const [txtPost, setTxtPost] = useState();
   const [posts, setPosts] = useState([]);
@@ -77,7 +79,7 @@ function App({ history }) {
 
   async function getPosts() {
     setLoading(true);
-    await api
+  /*  await api
       .post("/post", {
         usuario: localStorage.getItem("idLogin"),
       })
@@ -87,6 +89,8 @@ function App({ history }) {
       .catch((error) => {
         console.error(error);
       });
+*/
+      setPosts(mockPosts);
     setLoading(false);
   }
 
